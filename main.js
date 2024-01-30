@@ -35,7 +35,7 @@ const Game = () => {
                 turnComplete = false
                 while(!turnComplete) {
                     position = player.takeTurn()
-                    if (board.getBoard()[position] === '') {
+                    if (board.getBoard()[position] === ' ') {
                         board.markBoard(position, player.getMarker())
                         turnComplete = true
                     } else {
@@ -60,7 +60,7 @@ const Game = () => {
         winStates = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
         winStates.forEach((state) => {
-            if (currentBoard[state[0]] === currentBoard[state[1]] && currentBoard[state[1]] === currentBoard[state[2]] && currentBoard[state[0]] !== '') {
+            if (currentBoard[state[0]] === currentBoard[state[1]] && currentBoard[state[1]] === currentBoard[state[2]] && currentBoard[state[0]] !== ' ') {
                 if (currentBoard[state[0]] === players[0].getMarker()) {
                     console.log(players[0].getName() + ' wins! Winning selections: ' + state);
                 } else {
@@ -72,17 +72,17 @@ const Game = () => {
         })
 
         if (gameWon) {
-            console.log(currentBoard)
+            board.displayBoard()
             return
         }
 
         console.log('No winnings conditions detected, checking for cat\'s game.')
         //Check for full board state, declare Cat's game if full and above win conditions have not been met
-        if(currentBoard.includes('')) {
+        if(currentBoard.includes(' ')) {
             console.log('Board is not full')
         } else {
             //Board is full and no winner yet, cat's game
-            console.log(currentBoard)
+            board.displayBoard()
             console.log('Cat\'s game.')
             gameWon = true
             gameStarted = false
@@ -118,7 +118,7 @@ function Board() {
     let board = []
 
     const clearBoard = () => {
-        board = ['', '', '', '', '', '', '', '', '']
+        board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     }
     const markBoard = (boardSpotNum, marker) => {
         //The 1 based index will be passed in, e.g. 1 means top left, 9 means bottom right
@@ -128,7 +128,12 @@ function Board() {
         console.log(`Marked board spot ${arrayIndex} with an ${marker}`);
     }
     const getBoard = () => board
-    return {clearBoard, markBoard, getBoard}
+    const displayBoard = () => {
+        console.log(board[0]+board[1]+board[2])
+        console.log(board[3]+board[4]+board[5])
+        console.log(board[6]+board[7]+board[8])
+    }
+    return {clearBoard, markBoard, getBoard, displayBoard}
 };
 
 //Space
