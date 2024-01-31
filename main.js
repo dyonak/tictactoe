@@ -3,7 +3,7 @@
 //can checkforwin, announcewinner, resetgame
 //Use an IIFE for this
 //This will create and call all other objects
-const Game = () => {
+const Game = (() => {
     //let board = Board.createBoard()
     this.players = []
     this.gameStarted = false
@@ -88,8 +88,13 @@ const Game = () => {
             gameStarted = false
         }
     }
-    return {setupGame, announcePlayers, checkForWin, startGame, checkForWin}
-};
+    const completeGame = function(winningPlayer) {
+        //Draw winning line
+        //Announce winner
+        //Prompt user to play again with a button that has startGame() attached
+    }
+    return {setupGame, announcePlayers, checkForWin, startGame}
+})();
 
 //Player
 //has name, marker
@@ -103,6 +108,7 @@ const Player = function(name, marker) {
         //Prompt the user to take a turn "John, you're up. Place your X on the board!"
         //Await click
         //Currently just using random, this will return 0-8
+
         let selectedPosition = Math.floor(Math.random() * 9)
         console.log(`${name} requests space ${selectedPosition}`)
         return selectedPosition
@@ -136,11 +142,10 @@ function Board() {
     return {clearBoard, markBoard, getBoard, displayBoard}
 };
 
-//Space
-//has position
-//can updateMarker, enableclicks, disableclicks,
-game = Object.create(Game())
-game.setupGame()
-game.announcePlayers()
-game.startGame()
+function BoardSpot() {
+    
+}
 
+Game.setupGame()
+Game.announcePlayers()
+Game.startGame()
