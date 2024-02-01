@@ -108,14 +108,52 @@ main {
     border-radius: 24px;
     /*border: 1px solid rgba(209, 213, 219, 0.2);*/
     display: grid;
+
     grid-template-columns: 1fr 300px 300px 1fr;
     grid-template-rows: minmax(100px, 1fr) 600px minmax(100px, 1fr);
 }
 
 .gameControls {
+    padding-top: 20px;
     grid-column: 1 / 5;
     grid-row: 1 / 2;
+    display: grid;
+    grid-template-rows: 50px 50px;
+    grid-template-columns: 100px 1fr 200px;
+    gap: 10px;
+}
 
+.gameControls p{
+    font-family: 'workbench';
+    font-size: 4rem;
+    text-align: right;
+    color: #605dff;
+    align-self: end;
+}
+
+.gameControls input {
+    border: none;
+    font-family: 'gluten';
+    max-width: 250px;
+    height: 40px;
+    font-size: 3rem;
+    background-color: #333;
+    color: #eee;
+    align-self: center;
+    border-radius: 8px;
+    grid-column: 2 / 3;
+}
+
+.gameControls button {
+    grid-row: 1 / 3;
+    grid-column: 3 / 4;
+    font-family: 'gluten';
+    font-size: 2.5rem;
+    margin-right: 20px;
+    border: none;
+    color: #CCC;
+    background-color: #605dff;
+    border-radius: 20px;
 }
 
 .boardContainer {
@@ -162,8 +200,11 @@ main {
 .gameFeedback {
     grid-row: 3 / 4;
     grid-column: 1 / 5;
-
-
+    font-family: 'gluten';
+    font-size: 4rem;
+    text-align: center;
+    color: #605dff;
+    align-self: center;
 }
 
 footer {
