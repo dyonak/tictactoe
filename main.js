@@ -15,31 +15,45 @@ const Game = (() => {
     this.gameFeedbackDiv = document.querySelector('.gameFeedback')
     this.board = Object.create(Board(boardContainerDiv))
 
+    gameStartButton.addEventListener('click', (e) => {
+        e.preventDefault()
+        if (document.querySelector('#p1Input').value === '' || document.querySelector('#p2Input').value === '') {
+            //One or more player names are not entered
+            feedbackUpdate()
+        } else if (gameStartButton.textContent === 'RESET') {
+            setupGame()
+        } else {
+            //Take player names input and create player objects
+            player1 = Object.create(Player(document.querySelector('#p1Input').value, 'X'))
+            player2 = Object.create(Player(document.querySelector('#p2Input').value, 'O'))
+
+            //Update the player name labels
+            document.querySelector('#p1Name').textContent = player1.getName()
+            document.querySelector('#p2Name').textContent = player2.getName()
+
+            //Store the player objects in the players array
+            players.push(player1)
+            players.push(player2)
+
+            //Update the page feedback to reflect players are set
+            feedbackUpdate()
+
+            //Start the game
+            startGame()
+        }
+    })
+
     const setupGame = function() {
+        players = []
+        boardContainerDiv.innerHTML = ''
+        gameWon = false
+        gameActive = false
+
         //Instantiate two players
-        gameStartButton.addEventListener('click', (e) => {
-            if (document.querySelector('#p1Input').value === '' || document.querySelector('#p2Input').value === '') {
-                feedbackUpdate()
-            } else {
-                player1 = Object.create(Player(document.querySelector('#p1Input').value, 'X'))
-                player2 = Object.create(Player(document.querySelector('#p2Input').value, 'O'))
-
-                //Store the player objects in the players array
-                players.push(player1)
-                players.push(player2)
-                startGame()
-
-            }
-        })
         
         feedbackUpdate()
     }
     const startGame = function() {
-
-
-        //Store the player objects in the players array
-        players.push(player1)
-        players.push(player2)
 
         //Set gameActive flag to true, this will be used to manage UI state later
         gameActive = true
@@ -52,12 +66,26 @@ const Game = (() => {
 
     const feedbackUpdate = function() {
         if (gameActive === true && gameWon === false) {
+            document.querySelectorAll('.playerName').forEach(el => {
+                el.style.display = 'block'
+            })
+            document.querySelectorAll('.playerInput').forEach(el => {
+                el.style.display = 'none'
+            })
+            document.querySelector('.gameControls>button').textContent = 'RESET'
             gameFeedbackDiv.textContent = players[activePlayer].getName() + '\'s turn, place your '+ players[activePlayer].getMarker()
         }
         if (gameActive === false && gameWon == true) {
             gameFeedbackDiv.textContent = players[activePlayer].getName() + ' wins with 3 '+ players[activePlayer].getMarker() + '\'s!'
         }
         if (gameActive === false && gameWon == false) {
+            document.querySelectorAll('.playerName').forEach(el => {
+                el.style.display = 'none'
+            })
+            document.querySelectorAll('.playerInput').forEach(el => {
+                el.style.display = 'block'
+            })
+            document.querySelector('.gameControls>button').textContent = 'START'
             gameFeedbackDiv.textContent = 'Enter player names to start.'
         }
     }
@@ -98,6 +126,7 @@ const Game = (() => {
             board.consoleBoard()
 
             //Send winIndex to Board, if it's 0-2 it's horiz, 3-5 is vert, 6 is tl to br diag, 7 is tr to bl diag
+            board.drawWinline(winIndex)
             return
         }
 
@@ -114,11 +143,6 @@ const Game = (() => {
             return
         }
 
-    }
-    const completeGame = function(winningPlayer, winState) {
-        //Draw winning line
-        //Announce winner
-        //Prompt user to play again with a button that has startGame() attached
     }
     const getActivePlayer = () => players[activePlayer]
     return {setupGame, announcePlayers, checkForWin, startGame, getActivePlayer, turnHandler}
@@ -156,6 +180,10 @@ function Board(boardDiv) {
             boardContainer.appendChild(boardSpace)
             console.log(space + index)
         })
+        let winLine = document.createElement('div')
+        winLine.classList.add('winLine')
+        boardContainer.appendChild(winLine)
+        winLine.style.visibility = 'hidden'
     }
     const clearBoard = () => {
         boardContainer.innerHTML = ''
@@ -183,9 +211,27 @@ function Board(boardDiv) {
         }
 
     }
-    const drawWinline = () => {
-
+    const drawWinline = (winIndex) => {
+        let winLine = document.querySelector('.winLine')
+        console.log(winLine)
+        winLine.classList.add('winState'+winIndex)
+        winLine.style.visibility = 'visible'
+        document.querySelectorAll('.space').forEach((space) => {
+            recreateNode(space)
+        })
     }
+
+    function recreateNode(el, withChildren) {
+        if (withChildren) {
+          el.parentNode.replaceChild(el.cloneNode(true), el);
+        }
+        else {
+          var newEl = el.cloneNode(false);
+          while (el.hasChildNodes()) newEl.appendChild(el.firstChild);
+          el.parentNode.replaceChild(newEl, el);
+        }
+      }
+
     return {createBoard, clearBoard, markBoard, getBoard, consoleBoard, drawWinline}
 };
 

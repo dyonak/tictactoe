@@ -15,11 +15,13 @@
         </header>
         <main>
             <div class="gameControls">
-                <p>X</p><input id="p1Input" placeholder="Player 1 Name">
+                <p>X</p><p class="playerName" id="p1Name"></p><input id="p1Input" class="playerInput" placeholder="Player 1 Name">
                 <button>START</button>
-                <p>O</p><input id="p2Input" placeholder="Player 2 Name">
+                <p>O</p><p class="playerName" id="p2Name"></p><input id="p2Input" class="playerInput" placeholder="Player 2 Name">
             </div>
-            <div class="boardContainer"></div>
+            <div class="boardContainer">
+                <div class="winLine"></div>
+            </div>
             <div class="gameFeedback"></div>
         </main>
         <footer>
