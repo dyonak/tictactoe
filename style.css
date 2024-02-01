@@ -128,11 +128,11 @@ main {
     
 }
 
-.boardContainer * {
+.space{
     font-family: 'workbench';
     font-size: 20rem;
     color: #CCC;
-    padding-left: 45px;
+    text-align: center;
 }
 
 .space1 {

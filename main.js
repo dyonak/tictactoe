@@ -132,6 +132,7 @@ function Board(boardDiv) {
         board.forEach((space, index) => {
             let boardSpace = document.createElement('div')
             boardSpace.classList.add('space'+index)
+            boardSpace.classList.add('space')
             boardSpace.addEventListener('click', e => processClick(e))
             boardContainer.appendChild(boardSpace)
             console.log(space + index)
@@ -142,13 +143,9 @@ function Board(boardDiv) {
         createBoard()
     }
     const markBoard = (boardSpotNum, marker) => {
-        //The 1 based index will be passed in, e.g. 1 means top left, 9 means bottom right
-        //Subtract 1 from this numbder to get the array index and mark it
-        arrayIndex = boardSpotNum
-        board[arrayIndex] = marker
-        document.querySelector('.space'+arrayIndex).innerHTML = marker
-        document.querySelector('.space'+arrayIndex).removeEventListener('click', e => processClick(e))
-        console.log(`Marked board spot ${arrayIndex} with an ${marker}`)
+        board[boardSpotNum] = marker
+        document.querySelector('.space'+boardSpotNum).textContent = marker
+        console.log(`Marked board spot ${boardSpotNum} with an ${marker}`)
     }
     const getBoard = () => board
     const displayBoard = () => {
@@ -156,11 +153,11 @@ function Board(boardDiv) {
         console.log(board[3]+board[4]+board[5])
         console.log(board[6]+board[7]+board[8])
     }
-    const processClick = e => {
-        console.log(e.target)
+    const processClick = (e) => {
+        console.log()
     }
     const drawWinline = () => {
-        
+
     }
     return {createBoard, clearBoard, markBoard, getBoard, displayBoard, drawWinline}
 };
