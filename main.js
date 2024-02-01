@@ -8,12 +8,16 @@ const Game = (() => {
     this.players = []
     this.gameStarted = false
     this.gameWon = false
-    this.board = Object.create(Board())
+    this.gameControlsDiv = document.querySelector('.gameControls')
+    this.boardContainerDiv = document.querySelector('.boardContainer')
+    this.gameFeedbackDiv = document.querySelector('.gameFeedback')
+    this.board = Object.create(Board(boardContainerDiv))
 
     const setupGame = function() {
         //instantiate the board
         console.log(board.getBoard())
-        board.clearBoard()
+        board.createBoard()
+        board.displayBoard()
 
         //Instantiate two players
         let player1 = Object.create(Player('Josh', 'X'))
@@ -120,18 +124,31 @@ const Player = function(name, marker) {
 //Board
 //has spaces
 //can overlaywinline, createBoard, clearBoard
-function Board() {
+function Board(boardDiv) {
     let board = []
-
-    const clearBoard = () => {
+    let boardContainer = boardDiv
+    const createBoard = () => {
         board = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        board.forEach((space, index) => {
+            let boardSpace = document.createElement('div')
+            boardSpace.classList.add('space'+index)
+            boardSpace.addEventListener('click', e => processClick(e))
+            boardContainer.appendChild(boardSpace)
+            console.log(space + index)
+        })
+    }
+    const clearBoard = () => {
+        boardContainer.innerHTML = ''
+        createBoard()
     }
     const markBoard = (boardSpotNum, marker) => {
         //The 1 based index will be passed in, e.g. 1 means top left, 9 means bottom right
         //Subtract 1 from this numbder to get the array index and mark it
         arrayIndex = boardSpotNum
         board[arrayIndex] = marker
-        console.log(`Marked board spot ${arrayIndex} with an ${marker}`);
+        document.querySelector('.space'+arrayIndex).innerHTML = marker
+        document.querySelector('.space'+arrayIndex).removeEventListener('click', e => processClick(e))
+        console.log(`Marked board spot ${arrayIndex} with an ${marker}`)
     }
     const getBoard = () => board
     const displayBoard = () => {
@@ -139,7 +156,13 @@ function Board() {
         console.log(board[3]+board[4]+board[5])
         console.log(board[6]+board[7]+board[8])
     }
-    return {clearBoard, markBoard, getBoard, displayBoard}
+    const processClick = e => {
+        console.log(e.target)
+    }
+    const drawWinline = () => {
+        
+    }
+    return {createBoard, clearBoard, markBoard, getBoard, displayBoard, drawWinline}
 };
 
 function BoardSpot() {
