@@ -193,6 +193,7 @@ function Board(boardDiv) {
     const markBoard = (boardSpotNum, marker) => {
         board[boardSpotNum] = marker
         document.querySelector('.space'+boardSpotNum).textContent = marker
+        document.querySelector('.space'+boardSpotNum).classList.add('player'+marker)
         console.log(`Marked board spot ${boardSpotNum} with an ${marker}`)
 
     }

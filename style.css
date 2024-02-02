@@ -59,12 +59,34 @@ table {
 
 :root {
     font-size: 62.5%;
+    --primary-color: #00b89e;
+    --secondary-color: #f6c832;
+    --highlight-color: #f44546;
+    --dark-color: #042d53;
+    --subtle-color: ;
+    --gamepiece-font: 'workbench';
+    --header-font: 'workbench';
+    --feedback-font: 'gluten';
+
+}
+
+.glass {
+    backdrop-filter: blur(8px) saturate(70%);
+    -webkit-backdrop-filter: blur(8px) saturate(50%);
+    background-color: var(--secondary-color) / 1%;
+    border: 2px solid #CCCCEE88;
+}
+
+footer.glass {
+    border-bottom: none;
+}
+
+header.glass {
+    border-top: none;
 }
 
 body {
-    background-image: url('images/starry-sky-2675322_1920.jpg');
-    background-size: 100%;
-    background-color: #333;
+    background-image: url('images/background-3048876_1920_vert.jpg');
 }
 
 .container {
@@ -78,9 +100,7 @@ body {
 header {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    backdrop-filter: blur(8px) saturate(130%);
-    -webkit-backdrop-filter: blur(8px) saturate(130%);
-    background-color: rgba(255, 255, 255, 0.1);
+
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
     /*border: 1px solid rgba(209, 213, 219, 0.2);*/
@@ -93,7 +113,7 @@ header h1 {
     margin-top: 20px;
     font-family: 'workbench';
     font-size: 10rem;
-    color: #CCE;
+    color: var(--primary-color);
     align-self: center;
     justify-self: end;
     opacity: 100%;
@@ -103,9 +123,7 @@ header h1 {
 main {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    backdrop-filter: blur(8px) saturate(130%);
-    -webkit-backdrop-filter: blur(8px) saturate(130%);
-    background-color: rgba(255, 255, 255, 0.1);
+
     border-radius: 24px;
     /*border: 1px solid rgba(209, 213, 219, 0.2);*/
     display: grid;
@@ -126,19 +144,19 @@ main {
 
 .gameControls p{
     font-family: 'workbench';
-    font-size: 4rem;
+    font-size: 4.4rem;
     text-align: right;
-    color: #605dff;
     align-self: end;
 }
 
 .gameControls input {
     border: none;
     font-family: 'gluten';
-    height: 50px;
+    height: 40px;
     min-width: 240px;
     font-size: 3rem;
-    background-color: #333;
+    background-color: var(--dark-color);
+    border: var(--secondary-color) 1px solid;
     color: #eee;
     align-self: center;
     border-radius: 8px;
@@ -163,15 +181,16 @@ main {
     font-size: 2.5rem;
     margin-right: 20px;
     border: none;
-    color: #CCC;
-    background-color: #605dff;
+    color: var(--dark-color);
+    background-color: var(--primary-color);
     border-radius: 20px;
 }
 
 .boardContainer {
     grid-row: 2/3;
     grid-column: 2 / 4;
-
+    background-color: var(--dark-color);
+    border-radius: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -179,7 +198,7 @@ main {
 }
 
 .winLine {
-    border: 10px solid #1c1aad;
+    border: 10px solid var(--highlight-color);
     width: 550px;
     left: 25px;
     position: fixed;
@@ -276,16 +295,24 @@ main {
     border-right: #CCC 6px solid;
 }
 
+.playerX {
+    color: var(--primary-color);
+}
+
+.playerO {
+    color: var(--secondary-color);
+}
+
 .gameFeedback {
     grid-row: 3 / 4;
     grid-column: 1 / 5;
     font-family: 'gluten';
     font-size: 3.8rem;
     text-align: center;
-    color: #1c1aad;
+    color: var(--primary-color);
     align-self: center;
-    background-color: #eee;
-    opacity: 60%;
+    background-color: var(--dark-color);
+    opacity: 90%;
     border-radius: 20px;
     align-self: stretch;
     justify-content: center;
@@ -296,9 +323,7 @@ main {
 footer {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
-    backdrop-filter: blur(8px) saturate(130%);
-    -webkit-backdrop-filter: blur(8px) saturate(130%);
-    background-color: rgba(255, 255, 255, 0.1);
+
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     /*border: 1px solid rgba(209, 213, 219, 0.2);*/
