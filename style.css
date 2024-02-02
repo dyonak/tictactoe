@@ -178,7 +178,7 @@ main {
 }
 
 .winLine {
-    border: 5px solid red;
+    border: 10px solid #1c1aad;
     width: 550px;
     left: 25px;
     position: fixed;
@@ -187,6 +187,7 @@ main {
     top: 300px;
     rotate: 0deg;
     visibility: hidden;
+    border-radius: 7px;
 }
 
 .winState0 {
@@ -205,7 +206,7 @@ main {
 
 .winState3 {
     top: 300px;
-    left: -170px;
+    left: -190px;
     rotate: 90deg;
     visibility: visible;
 }
@@ -219,7 +220,7 @@ main {
 
 .winState5 {
     top: 300px;
-    left: 220px;
+    left: 210px;
     rotate: 90deg;
     visibility: visible;
 }
@@ -240,6 +241,14 @@ main {
     font-size: 20rem;
     color: #CCC;
     text-align: center;
+    line-height: 80%;
+    padding-top: 30px;
+}
+
+.space:hover {
+    background-color: #333;
+    opacity: 30%;
+    content: 'X';
 }
 
 .space1 {
@@ -272,8 +281,11 @@ main {
     font-family: 'gluten';
     font-size: 4rem;
     text-align: center;
-    color: #605dff;
+    color: #1c1aad;
     align-self: center;
+    background-color: #eee;
+    border-radius: 20px;
+    margin: 15px;
 }
 
 footer {
