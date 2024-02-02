@@ -63,6 +63,7 @@ table {
 
 body {
     background-image: url('images/starry-sky-2675322_1920.jpg');
+    background-size: 100%;
     background-color: #333;
 }
 
@@ -134,8 +135,8 @@ main {
 .gameControls input {
     border: none;
     font-family: 'gluten';
-    max-width: 250px;
-    height: 40px;
+    height: 50px;
+    min-width: 240px;
     font-size: 3rem;
     background-color: #333;
     color: #eee;
@@ -147,7 +148,7 @@ main {
 .gameControls .playerName {
     font-family: 'gluten';
     height: 40px;
-    font-size: 3rem;
+    font-size: 4.2rem;
     color: #eee;
     padding-left: 20px;
     text-align: left;
@@ -279,13 +280,17 @@ main {
     grid-row: 3 / 4;
     grid-column: 1 / 5;
     font-family: 'gluten';
-    font-size: 4rem;
+    font-size: 3.8rem;
     text-align: center;
     color: #1c1aad;
     align-self: center;
     background-color: #eee;
+    opacity: 60%;
     border-radius: 20px;
-    margin: 15px;
+    align-self: stretch;
+    justify-content: center;
+    margin: 35px;
+    padding-top: 20px;
 }
 
 footer {

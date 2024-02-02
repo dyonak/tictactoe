@@ -48,6 +48,7 @@ const Game = (() => {
         boardContainerDiv.innerHTML = ''
         gameWon = false
         gameActive = false
+        activePlayer = 0
 
         //Instantiate two players
         
