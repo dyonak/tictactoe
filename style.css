@@ -197,6 +197,15 @@ main {
     
 }
 
+.tieGame {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 65rem;
+    line-height: 90%;
+    right: 250px;
+    color: var(--highlight-color);
+    position: fixed;
+}
+
 .winLine {
     border: 10px solid var(--highlight-color);
     width: 550px;
@@ -309,7 +318,7 @@ main {
     font-family: 'gluten';
     font-size: 3.8rem;
     text-align: center;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     align-self: center;
     background-color: var(--dark-color);
     opacity: 90%;

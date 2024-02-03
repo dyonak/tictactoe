@@ -9,6 +9,7 @@ const Game = (() => {
     this.activePlayer = 0
     this.gameActive = false
     this.gameWon = false
+    this.tieGame = false
     this.gameControlsDiv = document.querySelector('.gameControls')
     this.gameStartButton = document.querySelector('.gameControls>button')
     this.boardContainerDiv = document.querySelector('.boardContainer')
@@ -49,6 +50,7 @@ const Game = (() => {
         gameWon = false
         gameActive = false
         activePlayer = 0
+        tieGame = false
 
         //Instantiate two players
         
@@ -66,6 +68,14 @@ const Game = (() => {
     }
 
     const feedbackUpdate = function() {
+        if (tieGame === true) {
+            gameFeedbackDiv.textContent = "It's a tie!"
+            tieGameDiv = document.createElement('div')
+            tieGameDiv.textContent = "C"
+            tieGameDiv.classList.add('tieGame')
+            boardContainerDiv.append(tieGameDiv)
+        }
+
         if (gameActive === true && gameWon === false) {
             document.querySelectorAll('.playerName').forEach(el => {
                 el.style.display = 'block'
@@ -79,7 +89,8 @@ const Game = (() => {
         if (gameActive === false && gameWon == true) {
             gameFeedbackDiv.textContent = players[activePlayer].getName() + ' wins with 3 '+ players[activePlayer].getMarker() + '\'s!'
         }
-        if (gameActive === false && gameWon == false) {
+
+        if (gameActive === false && gameWon === false) {
             document.querySelectorAll('.playerName').forEach(el => {
                 el.style.display = 'none'
             })
@@ -141,6 +152,7 @@ const Game = (() => {
             console.log('Cat\'s game.')
             gameWon = true
             gameStarted = false
+            tieGame = true
             return
         }
 
